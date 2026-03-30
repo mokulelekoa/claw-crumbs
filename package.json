@@ -1,0 +1,23 @@
+{
+  "name": "claw-crumbs",
+  "version": "0.1.0",
+  "description": "Per-project bootstrap crumbs for OpenClaw",
+  "type": "module",
+  "dependencies": {
+    "@sinclair/typebox": "0.34.48"
+  },
+  "peerDependencies": {
+    "openclaw": ">=0.0.0"
+  },
+  "openclaw": {
+    "compat": {
+      "pluginApi": "^1.0.0"
+    },
+    "build": {
+      "openclawVersion": ">=0.1.0"
+    },
+    "extensions": [
+      "./src/index.js"
+    ]
+  }
+}

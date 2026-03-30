@@ -1,0 +1,3 @@
+node_modules/
+.claw-crumbs.md
+npm-debug.log*

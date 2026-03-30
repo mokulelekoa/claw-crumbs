@@ -1,0 +1,30 @@
+{
+  "id": "claw-crumbs",
+  "name": "Claw Crumbs",
+  "description": "Per-project durable context crumbs with project bootstrap matching and refresh tools.",
+  "skills": ["./skills"],
+  "contracts": {
+    "tools": ["claw_crumbs_status", "claw_crumbs_refresh"]
+  },
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "enabled": { "type": "boolean" },
+      "crumbFilenames": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "projectRoots": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "triggerPhrases": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "maxReadBytes": { "type": "number" },
+      "maxSectionChars": { "type": "number" }
+    }
+  }
+}
