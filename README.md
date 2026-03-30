@@ -1,55 +1,66 @@
 # Claw Crumbs
 
-Claw Crumbs adds durable per-project note files that OpenClaw can read before resuming work on a project.
+Claw Crumbs gives OpenClaw durable per-project memory.
+
+It keeps a short crumb file at each project root so the agent can quickly recover current state, important files, decisions, known issues, next steps, and proven commands before resuming work. That makes interrupted sessions, long-running projects, and cross-day handoffs much cleaner.
+
+## Why it exists
+Normal chat context is temporary. Projects are not.
+
+Claw Crumbs stores the small amount of durable context that future sessions actually need, without turning your repo into a diary.
 
 ## What it does
 - stores a short crumb file in each project root
-- preserves both project state and operational context
-- can detect project-resume prompts and return a matching bootstrap brief
-- exposes optional tools to list crumbs and refresh a crumb file
+- preserves project state and operational context
+- detects resume-style prompts and returns a matching bootstrap brief
+- exposes optional tools to inspect crumb coverage and refresh crumb files
 
-## Recommended mental model
+## Mental model
 - **Crumb** = durable project + operational context
-- **BOOTSTRAP.md** = temporary session instructions
+- **BOOTSTRAP.md** = temporary session guidance
 
-The critical path Claw Crumbs should preserve is:
-- code
-- commit
-- deploy
-- service / infra access
+The most valuable things to preserve are usually:
+- current state
+- key files
+- decisions
+- next steps
+- deploy/release flow
+- service or infra access notes
+- commands that worked
+- commands that failed
 
 ## Default crumb filename
 `.claw-crumbs.md`
 
 ## Runtime requirement
-This plugin is meant to run inside an OpenClaw environment that provides the plugin runtime and SDK.
-It is not intended to run as a standalone Node package outside OpenClaw.
+Claw Crumbs is designed to run inside OpenClaw. It is not intended to operate as a standalone Node package outside the OpenClaw plugin runtime.
 
-## Quick Start
+## Quick start
 1. Install and enable the plugin:
    ```bash
    openclaw plugins install ./claw-crumbs --link
    openclaw plugins enable claw-crumbs
    ```
-2. Create a project crumb at the root of a project using `.claw-crumbs.md`.
+2. Create a crumb file at the root of a project using `.claw-crumbs.md`.
 3. Add a few high-value sections such as:
    - Current State
    - Important Files
    - Next Steps
    - Durable Operations
    - Deploy / Release
-4. Return to the project with a prompt like:
+4. Return later with prompts like:
    - `continue the billing portal`
    - `work on the clinic scheduler project`
-5. OpenClaw can use the crumb as a short project bootstrap brief.
+   - `resume the renovation estimate`
+5. OpenClaw can use the crumb as a short bootstrap brief before resuming work.
 
-## Install locally
+## Local install
 ```bash
 openclaw plugins install ./claw-crumbs --link
 openclaw plugins enable claw-crumbs
 ```
 
-## Example prompts it can intercept
+## Example prompts
 - "continue the billing portal"
 - "back to the analytics dashboard"
 - "resume the renovation estimate"
@@ -69,17 +80,17 @@ openclaw plugins enable claw-crumbs
 - Commands That Worked
 - Commands That Failed
 
-## End-of-session update prompt
+## End-of-session refresh prompt
 Near the end of a session, say:
 
 **"Update the claw crumbs for this project before we stop."**
 
-If you want a richer refresh, say:
+For a richer refresh, say:
 
 **"Update the claw crumbs for this project with current state, important files, next steps, deploy flow, and any gotchas."**
 
 ## Config
-Configured under `plugins.entries.claw-crumbs.config`.
+Configure under `plugins.entries.claw-crumbs.config`.
 
 Key options:
 - `crumbFilenames`: filenames to recognize (default prefers `.claw-crumbs.md`)
@@ -109,11 +120,11 @@ Example:
 }
 ```
 
-## Safety rules
-- never store raw secrets in the crumb
+## Safety
+- never store raw secrets in a crumb
 - store **paths**, not secret values
 - store exact commands when useful
-- keep it readable by both humans and OpenClaw
+- keep crumbs short, durable, and readable by both humans and OpenClaw
 
 ## One-line usage rule
-**Use Claw Crumbs to make sure future sessions never forget how the project actually works.**
+**Use Claw Crumbs so future sessions can resume the real project, not just the memory of a chat.**
