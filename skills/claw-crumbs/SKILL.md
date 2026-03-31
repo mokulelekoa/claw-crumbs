@@ -34,6 +34,14 @@ Prefer one of these filenames at the project root:
 - BOOTSTRAP.md is temporary session guidance; crumbs are durable project guidance.
 - Update crumbs after meaningful milestones, not every tiny step.
 
+## Staleness Prevention
+Crumb files can drift from the actual project state. Follow these rules to keep them trustworthy:
+- **Verify before trusting.** When resuming a project, spot-check crumb claims against reality (e.g., do listed files still exist? does the stated "current state" match?). If anything is wrong, fix the crumbs immediately.
+- **Last Updated is mandatory.** Always include and update the `Last Updated` date. If it's more than 2 weeks old, treat the crumbs as potentially stale and verify key claims before relying on them.
+- **Prune dead items.** When updating crumbs, remove completed next steps, resolved issues, and decisions that are now obvious from the code itself. Don't accumulate — replace.
+- **Flag uncertainty.** If you're unsure whether a crumb entry is still accurate, mark it with `⚠️ UNVERIFIED` rather than silently passing it along.
+- **Rebuild over patch.** If more than half the crumbs look outdated, delete and regenerate from the current project state rather than trying to patch.
+
 ## Suggested sections
 - Project
 - Current State
